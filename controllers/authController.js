@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 export const doSignup = async (req, res) => {
   try {
     const { signupData } = req.body;
-    const email = await userModel.findOne({ email: signupData.email });
+    const email = await userModel.findOne({ email: signupData.email.toLowerCase() });
     if (email) {
       return res.status(200).json({
         message: "Email already exist",
@@ -19,7 +19,7 @@ export const doSignup = async (req, res) => {
     await userModel.create({
       first_name: signupData.fName,
       last_name: signupData.lName,
-      email: signupData.email,
+      email: signupData.email.toLowerCase(),
       password: signupData.password,
       image: "",
     });
@@ -31,7 +31,7 @@ export const doSignup = async (req, res) => {
 export const doLogin = async (req, res) => {
   try {
     const { loginData } = req.body;
-    const email = await userModel.findOne({ email: loginData.email });
+    const email = await userModel.findOne({ email: loginData.email.toLowerCase() });
     if (!email) {
       return res.status(200).json({
         success: false,
