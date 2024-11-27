@@ -24,7 +24,7 @@ const userSchema = mongoose.Schema({
   role: {
     type: Number,
     required: true,
-    default: 3,
+    default: 1,
   },
   wallet: {
     type: Number,
